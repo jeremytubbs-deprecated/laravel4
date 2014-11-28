@@ -1,6 +1,7 @@
 <?php
 
 use Acme\Forms\LoginForm;
+use Laracasts\Validation\FormValidationException;
 
 class AuthController extends \BaseController {
 

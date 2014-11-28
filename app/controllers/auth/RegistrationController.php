@@ -2,6 +2,7 @@
 
 use Acme\Forms\RegistrationForm;
 use Acme\Registration\RegisterUserCommand;
+use Laracasts\Validation\FormValidationException;
 
 class RegistrationController extends \BaseController {
 
@@ -39,8 +40,14 @@ class RegistrationController extends \BaseController {
      */
     public function postRegister()
     {
-        $this->registrationForm->validate(Input::all());
-
+        try
+        {
+            $this->registrationForm->validate(Input::all());
+        }
+        catch (FormValidationException $e)
+        {
+            return Redirect::back()->withInput()->withErrors($e->getErrors());
+        }
         $user = $this->execute(RegisterUserCommand::class);
 
         Auth::login($user);

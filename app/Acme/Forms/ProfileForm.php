@@ -2,7 +2,7 @@
 
 use Laracasts\Validation\FormValidator;
 
-class LoginForm extends FormValidator {
+class ProfileForm extends FormValidator {
 
     /**
      * Validation rules for the login form.
@@ -10,8 +10,8 @@ class LoginForm extends FormValidator {
      * @var array
      */
     protected $rules = [
-        'email'    => 'required|email',
-        'password' => 'required'
+    	'username' => 'unique:users',
+        'email'    => 'required|email|unique:users'
     ];
 
 }

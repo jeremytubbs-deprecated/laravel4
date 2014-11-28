@@ -1,21 +1,21 @@
-<?php namespace Acme\Groups;
+<?php namespace Acme\Users\Profiles;
 
 use Eloquent;
 
-class Group extends Eloquent {
+class Profile extends Eloquent {
 
 	/**
      * Which fields may be mass assigned?
      *
      * @var array
      */
-	protected $fillable = ['name', 'description'];
+	protected $fillable = ['username', 'first_name', 'last_name'];
 
 	/**
      * A group can belong to many users
      */
 	public function users()
     {
-        return $this->belongsToMany('Acme\Users\User');
+        return $this->belongsToOne('Acme\Users\User');
     }
 }

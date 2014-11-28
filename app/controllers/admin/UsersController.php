@@ -1,7 +1,7 @@
 <?php
 
 use Acme\Users\User;
-use Acme\Groups\Group;
+use Acme\Users\Groups\Group;
 
 class UsersController extends \BaseController {
 

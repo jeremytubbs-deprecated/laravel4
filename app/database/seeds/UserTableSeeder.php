@@ -1,13 +1,12 @@
 <?php
 
 use Acme\Users\User;
-use Acme\Groups\Group;
+use Acme\Users\Groups\Group;
 
 class UserTableSeeder extends Seeder {
 
 	public function run()
 	{
-
 		///create admin role
 		$group = Group::create([
 			'name' => 'admin'

@@ -1,6 +1,6 @@
 <?php
 
-use Acme\Groups\Group;
+use Acme\Users\Groups\Group;
 
 class GroupsController extends \BaseController {
 

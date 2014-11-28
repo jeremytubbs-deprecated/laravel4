@@ -5,6 +5,10 @@
 	<h1>Add User</h1>
 	{{ Form::open(array('action' => array('UsersController@store'), 'method' => 'POST', 'role' => 'form')) }}
 		<div class="form-group">
+			{{ Form::label('Username') }}
+			{{ Form::text('username', NULL, array('class' => 'form-control')) }}
+		</div>
+		<div class="form-group">
 			{{ Form::label('First Name') }}
 			{{ Form::text('first_name', NULL, array('class' => 'form-control')) }}
 		</div>

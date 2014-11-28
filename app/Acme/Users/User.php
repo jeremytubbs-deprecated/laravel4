@@ -93,7 +93,14 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
      * A user can belong to many groups
      */
     public function groups() {
-        return $this->belongsToMany('Acme\Groups\Group');
+        return $this->belongsToMany('Acme\Users\Groups\Group');
+    }
+
+    /**
+     * A user can have one profile
+     */
+    public function profile() {
+        return $this->hasOne('Acme\Users\Profiles\Profile');
     }
 
     public function hasGroup($name) {

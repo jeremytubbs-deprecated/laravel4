@@ -1,6 +1,7 @@
 <?php
 
 use Acme\Users\User;
+use Acme\Registration\RegisterUserCommand;
 
 class FacebookController extends \BaseController {
 
@@ -35,21 +36,25 @@ class FacebookController extends \BaseController {
 		 * Get basic info on the user from Facebook.
 		 */
 		try {
-			$facebook_user = Facebook::object('me')->fields('id', 'email')->get();
+			$facebook_user = Facebook::object('me')->fields('id', 'email', 'name', 'first_name', 'last_name')->get();
 		} catch (FacebookQueryBuilderException $e) {
 			return Redirect::to('/')->with('error', $e->getPrevious()->getMessage());
 		}
+		dd($facebook_user);
 
 		// Create the user if not exists or update existing
 		$user = User::createOrUpdateFacebookObject($facebook_user);
 		$user->access_token = $token->access_token;
 		$user->save();
-		// $user = $this->execute(FacebookRegisterUserCommand::class);
 
 		// Log the user into Laravel
 		Facebook::auth()->login($user);
 
-		return Redirect::to('/')->with('message', 'Successfully logged in with Facebook');
+		//$user = $this->execute(RegisterUserCommand::class);
+
+		Flash::overlay('Welcome to the site you are now logged in!');
+
+		return Redirect::to('/');
 	}
 
 }
