@@ -36,14 +36,14 @@ class FacebookController extends \BaseController {
 		 * Get basic info on the user from Facebook.
 		 */
 		try {
-			$facebook_user = Facebook::object('me')->fields('id', 'email', 'name', 'first_name', 'last_name')->get();
+			$facebook_user = Facebook::object('me')->fields('id', 'email', 'first_name', 'last_name', 'birthday', 'locale', 'timezone', 'gender')->get();
 		} catch (FacebookQueryBuilderException $e) {
 			return Redirect::to('/')->with('error', $e->getPrevious()->getMessage());
 		}
-		dd($facebook_user);
 
 		// Create the user if not exists or update existing
 		$user = User::createOrUpdateFacebookObject($facebook_user);
+		// $user->facebook_user_id = $facebook_user['id'];
 		$user->access_token = $token->access_token;
 		$user->save();
 

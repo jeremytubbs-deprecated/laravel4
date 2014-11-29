@@ -4,6 +4,7 @@ use Illuminate\Auth\UserTrait;
 use Illuminate\Auth\UserInterface;
 use Illuminate\Auth\Reminders\RemindableTrait;
 use Illuminate\Auth\Reminders\RemindableInterface;
+use Illuminate\Database\Eloquent\SoftDeletingTrait;
 use Acme\Registration\Events\UserHasRegistered;
 use Laracasts\Commander\Events\EventGenerator;
 use Eloquent, Hash;
@@ -12,7 +13,9 @@ use SammyK\LaravelFacebookSdk\FacebookableTrait;
 
 class User extends Eloquent implements UserInterface, RemindableInterface {
 
-	use UserTrait, RemindableTrait, EventGenerator, PresentableTrait, FacebookableTrait;
+	use UserTrait, RemindableTrait, EventGenerator, PresentableTrait, FacebookableTrait, SoftDeletingTrait;
+
+    protected $dates = ['deleted_at'];
 
     /**
      * Which fields may be mass assigned?
@@ -54,7 +57,6 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 
 
     protected static $facebook_field_aliases = [
-        'facebook_field_name' => 'database_column_name',
         'id' => 'facebook_user_id',
     ];
 
@@ -94,13 +96,6 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
      */
     public function groups() {
         return $this->belongsToMany('Acme\Users\Groups\Group');
-    }
-
-    /**
-     * A user can have one profile
-     */
-    public function profile() {
-        return $this->hasOne('Acme\Users\Profiles\Profile');
     }
 
     public function hasGroup($name) {

@@ -21,6 +21,12 @@ class CreateUsersTable extends Migration {
 			$table->rememberToken();
 			$table->bigInteger('facebook_user_id')->unsigned()->index();
 			$table->string('access_token')->nullable();
+			$table->string('first_name')->nullable();
+			$table->string('last_name')->nullable();
+			$table->string('gender')->nullable();
+			$table->string('locale')->nullable();
+			$table->string('timezone')->nullable();
+			$table->softDeletes();
 			$table->timestamps();
 		});
 	}

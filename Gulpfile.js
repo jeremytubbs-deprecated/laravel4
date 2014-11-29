@@ -8,7 +8,7 @@ var minifycss = require('gulp-minify-css');
 gulp.task('css', function() {
    return gulp.src('app/assets/sass/main.scss')
    		.pipe(plumber())
-    	.pipe(sass({errLogToConsole: true}))
+    	.pipe(sass({errLogToConsole: true, precision: 10}))
        	.pipe(autoprefixer('last 10 version'))
        	.pipe(gulp.dest('public/css'));
 });
@@ -16,7 +16,7 @@ gulp.task('css', function() {
 gulp.task('vendor_sass', function() {
    return gulp.src('app/assets/vendor/stylesheets/bootstrap.scss')
        	.pipe(plumber())
-        .pipe(sass({errLogToConsole: true}))
+        .pipe(sass({errLogToConsole: true, precision: 10}))
         .pipe(autoprefixer('last 10 version'))
         .pipe(rename('vendor.min.css'))
         .pipe(minifycss())
