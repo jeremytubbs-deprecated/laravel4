@@ -11,6 +11,11 @@ body {
 	transition: none !important;
 }
 
+.navbar-nav>li>a.dropdown-gravatar {
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
 #content-wrapper {
     padding-left: 0;
     margin-left: 0;

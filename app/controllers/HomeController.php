@@ -1,5 +1,7 @@
 <?php
 
+use SammyK\FacebookQueryBuilder\FacebookQueryBuilderException;
+
 class HomeController extends BaseController {
 
 	/*
